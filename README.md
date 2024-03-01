@@ -22,7 +22,6 @@
 
 | Column                 | Type     | Options                   |
 | ---------------------- | -------- | ------------------------- |
-| image                  | string   | null: false               |
 | name                   | string   | null: false               |
 | description            | text     | null: false               |
 | category_id            | integer  | null: false               |
@@ -32,36 +31,32 @@
 
 ### Association
 - belongs_to :user
-- has_one :orders
+- has_one :order
 
 
 ## orders テーブル
 
 | Column                 | Type     | Options                   |
 | ---------------------- | -------- | ------------------------- |
-| user_id                | integer  | null: false               |
-| item_id                | integer  | null: false               |
-| status                 | string   | null: false, default: 0   |
-| total_value            | integer  | null: false               |
-| shipping_date          | datetime | null: false               |
+| user                   | references | foreign_key:true |
+| item                   | references | foreign_key:true |
 
 ### Association
 - belongs_to :user
-- has_one :item
-- has_one :addresses
-
+- belongs_to :item
+- has_one :address
 
 ## addresses テーブル
 
 | Column                 | Type     | Options                   |
 | ---------------------- | -------- | ------------------------- |
-| user_id                | integer  | null: false               |
+| oder                   | references | foreign_key: true        |
 | postal_code            | string   | null: false               |
-| prefecture             | string   | null: false               |
+| prefecture_id          | integer  | null: false               |
 | city                   | string   | null: false               |
 | address_line           | string   | null: false               |
 | building               | string   |                           |
 | phone_number           | string   | null: false               |
 
 ### Association
-- has_one :order
+- belongs_to :order
