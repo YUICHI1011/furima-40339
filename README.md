@@ -11,7 +11,7 @@
 | last_name              | string   | null: false               |
 | first_name_kana        | string   | null: false               |
 | last_name_kana         | string   | null: false               |
-| birthday               | datetime | null: false               |
+| birthday               | date     | null: false               |
 
 ### Association
 - has_many :items
@@ -28,6 +28,10 @@
 | status_id              | integer  | null: false               |
 | value                  | integer  | null: false               |
 | user                   | references | foreign_key: true       |
+| condition              | string   | null: false               |
+| shipping_free          | string   | null: false               |
+| prefecture_id          | integer  | null: false               |
+| shipping_days          | integer  | null: false               |
 
 ### Association
 - belongs_to :user
@@ -50,7 +54,7 @@
 
 | Column                 | Type     | Options                   |
 | ---------------------- | -------- | ------------------------- |
-| oder                   | references | foreign_key: true        |
+| order                  | references | foreign_key: true       |
 | postal_code            | string   | null: false               |
 | prefecture_id          | integer  | null: false               |
 | city                   | string   | null: false               |
