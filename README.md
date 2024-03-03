@@ -26,12 +26,11 @@
 | description            | text     | null: false               |
 | category_id            | integer  | null: false               |
 | status_id              | integer  | null: false               |
-| value                  | integer  | null: false               |
+| price                  | integer  | null: false               |
 | user                   | references | foreign_key: true       |
-| condition              | string   | null: false               |
-| shipping_free          | string   | null: false               |
+| shipping_free_id       | integer  | null: false               |
 | prefecture_id          | integer  | null: false               |
-| shipping_days          | integer  | null: false               |
+| shipping_day_id        | integer  | null: false               |
 
 ### Association
 - belongs_to :user
@@ -42,8 +41,8 @@
 
 | Column                 | Type     | Options                   |
 | ---------------------- | -------- | ------------------------- |
-| user                   | references | foreign_key:true |
-| item                   | references | foreign_key:true |
+| user                   | references | foreign_key: true , null: false |
+| item                   | references | foreign_key: true , null: false |
 
 ### Association
 - belongs_to :user
@@ -54,7 +53,7 @@
 
 | Column                 | Type     | Options                   |
 | ---------------------- | -------- | ------------------------- |
-| order                  | references | foreign_key: true       |
+| order                  | references | foreign_key: true , null: false |
 | postal_code            | string   | null: false               |
 | prefecture_id          | integer  | null: false               |
 | city                   | string   | null: false               |
