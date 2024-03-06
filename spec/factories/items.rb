@@ -4,7 +4,7 @@ FactoryBot.define do
     description { Faker::Lorem.sentence }
     category_id { FactoryBot.create(:category).id }
     status_id { FactoryBot.create(:status).id }
-    price { Faker::Commerce.price(range: 300..9999999) }
+    price { Faker::Number.between(from: 300, to: 9999999) }
     shipping_fee_id { FactoryBot.create(:shipping_fee).id }
     prefecture_id { FactoryBot.create(:prefecture).id }
     shipping_day_id { FactoryBot.create(:shipping_day).id }

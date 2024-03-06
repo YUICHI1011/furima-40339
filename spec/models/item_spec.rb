@@ -93,16 +93,34 @@ RSpec.describe Item, type: :model do
           expect(@item.errors.full_messages).to include("Shipping day must be other than 1")
         end
 
-        it "価格が空では登録できないこと" do
+        it "商品価格が空では登録できないこと" do
           @item.price  = ""
           @item.valid?
           expect(@item.errors.full_messages).to include("Price can't be blank")
         end
         
-        it "価格が全角数字では登録できないこと" do
+        it "商品価格が全角数字では登録できないこと" do
           @item.price = "１０００" # 全角数字を代入
           @item.valid?
           expect(@item.errors.full_messages).to include("Price is not a number")
+        end
+      
+        it "商品価格が299円以下では出品できない" do
+          @item.price = 299
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
+        end
+
+        it "商品価格が10_000_000円以上では出品できない" do
+          @item.price = 10_000_000
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
+        end
+      
+        it "userが紐づいていないと出品できない" do
+          @item.user  = nil
+          @item.valid?
+          expect(@item.errors.full_messages).to include("User must exist")
         end
       end
     end
