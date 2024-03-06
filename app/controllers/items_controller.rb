@@ -2,21 +2,25 @@ class ItemsController < ApplicationController
   before_action :authenticate_user! ,except:[:index]
   
   # def index
-  #   @items = Item.all
+  #   @item = Item.all
   # end
 
-  # def new
-  #   @items = Item.new
-  # end
+  def new
+    @item = Item.new
+  end
 
-  # def create
-  # Item.create(item_params)
-  #   redirect_to '/'
-  # end
+  def create
+    @item = Item.new(item_params)
+    if @item.save
+      redirect_to root_path
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
 
   private
   def item_params
-    params.require(:item).permit(:name, :description, :category_id, :status_id, :price, :user, :hipping_free_id, :prefecture_id, :shipping_day_id)
+    params.require(:item).permit(:image, :name, :description, :category_id, :status_id, :price, :shipping_fee_id, :prefecture_id, :shipping_day_id).merge(user_id: current_user.id)
   end
 
 end
