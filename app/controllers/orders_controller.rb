@@ -5,7 +5,7 @@ class OrdersController < ApplicationController
       gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
 
       if user_signed_in?
-        redirect_to root_path if current_user == @item.user || @item.orders.exists?
+        redirect_to root_path if current_user == @item.user || @item.order != nil
       else
         redirect_to new_user_session_path
       end
@@ -31,7 +31,7 @@ class OrdersController < ApplicationController
     end
 
     def set_item
-      @item = Item.find(params[:id])
+      @item = Item.find(params[:item_id])
     end
 
 
